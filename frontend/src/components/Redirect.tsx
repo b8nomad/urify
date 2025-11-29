@@ -9,7 +9,7 @@ const Redirect = () => {
     const fetchAndRedirect = async () => {
       if (slug) {
         const response = await fetch(
-          `${import.meta.env.BACKEND_URL}?url_slug=${encodeURIComponent(
+          `${import.meta.env.VITE_BACKEND_URL}?url_slug=${encodeURIComponent(
             slug
           )}`,
           {

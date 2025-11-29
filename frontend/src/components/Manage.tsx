@@ -25,7 +25,7 @@ const Manage = () => {
     setError("");
 
     try {
-      const response = await fetch(`${import.meta.env.BACKEND_URL}?url_slug=${encodeURIComponent(slug)}&password=${encodeURIComponent(password)}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}?url_slug=${encodeURIComponent(slug)}&password=${encodeURIComponent(password)}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ const Manage = () => {
     setError("");
 
     try {
-      const response = await fetch(`${import.meta.env.BACKEND_URL}?new_password=${encodeURIComponent(newPassword)}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}?new_password=${encodeURIComponent(newPassword)}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -129,7 +129,7 @@ const Manage = () => {
                 URL Slug
               </label>
               <div className="input-group">
-                <span className="input-group-text">urify.b8nomad.lol/r/</span>
+                <span className="input-group-text">https://urify.b8nomad.lol/r/</span>
                 <input
                   type="text"
                   className="form-control"

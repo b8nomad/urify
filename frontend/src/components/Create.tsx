@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const Create = () => {
   const [redirect, setRedirect] = useState("");
@@ -8,6 +9,7 @@ const Create = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const location = useLocation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,13 +18,15 @@ const Create = () => {
     setSuccess("");
 
     try {
-      const response = await fetch(`${import.meta.env.BACKEND_URL}`, {
-        method: 'POST',
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          redirect: redirect.startsWith('http') ? redirect : `https://${redirect}`,
+          redirect: redirect.startsWith("http")
+            ? redirect
+            : `https://${redirect}`,
           url_slug: slug,
           password,
         }),
@@ -31,16 +35,18 @@ const Create = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Failed to create short URL');
+        throw new Error(data.message || "Failed to create short URL");
       }
 
-      setSuccess(`Short URL created successfully! Your URL: urify.b8nomad.lol/r/${slug}`);
+      setSuccess(
+        `Short URL created successfully! Your URL: urify.b8nomad.lol/r/${slug}`
+      );
       // Reset form
       setRedirect("");
       setSlug("");
       setPassword("");
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -83,7 +89,9 @@ const Create = () => {
               Custom Slug
             </label>
             <div className="input-group">
-              <span className="input-group-text">https://urify.b8nomad.lol/r/</span>
+              <span className="input-group-text">
+                https://urify.b8nomad.lol/r/
+              </span>
               <input
                 type="text"
                 className="form-control"
@@ -101,23 +109,27 @@ const Create = () => {
             </label>
             <div className="input-group">
               <input
-              type={isPassVisible ? "text" : "password"}
-              className="form-control"
-              id="password"
-              placeholder="Enter a password (optional)"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button
-              type="button"
-              className="btn btn-outline-secondary"
-              onClick={() => setIsPassVisible(!isPassVisible)}
-            >
-              {isPassVisible ? "Hide" : "Show"}
-            </button>
+                type={isPassVisible ? "text" : "password"}
+                className="form-control"
+                id="password"
+                placeholder="Enter a password (optional)"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button
+                type="button"
+                className="btn btn-outline-secondary"
+                onClick={() => setIsPassVisible(!isPassVisible)}
+              >
+                {isPassVisible ? "Hide" : "Show"}
+              </button>
             </div>
           </div>
-          <button type="submit" className="btn btn-success" disabled={isLoading}>
+          <button
+            type="submit"
+            className="btn btn-success"
+            disabled={isLoading}
+          >
             {isLoading ? "Creating..." : "Shorten URL"}
           </button>
         </form>

@@ -25,7 +25,7 @@ const Manage = () => {
     setError("");
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}?url_slug=${encodeURIComponent(slug)}&password=${encodeURIComponent(password)}`, {
+      const response = await fetch(`/api/urify?url_slug=${encodeURIComponent(slug)}&password=${encodeURIComponent(password)}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ const Manage = () => {
     setError("");
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}?new_password=${encodeURIComponent(newPassword)}`, {
+      const response = await fetch(`/api/urify?new_password=${encodeURIComponent(newPassword)}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

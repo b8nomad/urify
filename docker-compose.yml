@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: urify-backend
+    env_file:
+      - ./.env
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "3000:3000"
+    networks:
+      - urify-net
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: urify-frontend
+    # frontend is static; no env file needed by default
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+    networks:
+      - urify-net
+    restart: unless-stopped
+
+networks:
+  urify-net:
+    driver: bridge

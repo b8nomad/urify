@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
 
 const Create = () => {
   const [redirect, setRedirect] = useState("");
@@ -9,7 +8,6 @@ const Create = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const location = useLocation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,7 +16,7 @@ const Create = () => {
     setSuccess("");
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}`, {
+      const response = await fetch('/api/urify', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

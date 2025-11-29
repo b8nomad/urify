@@ -9,7 +9,8 @@ const Redirect = () => {
     const fetchAndRedirect = async () => {
       if (slug) {
         const response = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}?url_slug=${encodeURIComponent(
+          `http://localhost:3000
+P?url_slug=${encodeURIComponent(
             slug
           )}`,
           {
